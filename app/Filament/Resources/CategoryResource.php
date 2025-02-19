@@ -46,6 +46,7 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Name')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')

@@ -12,3 +12,6 @@ Route::get('/{username?}/project-detail/{id}', [App\Http\Controllers\PortfolioCo
 Route::get('/{username?}/skill', [App\Http\Controllers\PortfolioController::class, 'skill'])->name('skill');
 Route::get('/{username?}/experience', [App\Http\Controllers\PortfolioController::class, 'experience'])->name('experience');
 Route::get('/{username?}/testimonial', [App\Http\Controllers\PortfolioController::class, 'testimonial'])->name('testimonial');
+Route::get('/{username?}/post', [App\Http\Controllers\PortfolioController::class, 'post'])->name('post');
+Route::get('/{username?}/post-detail/{id}', [App\Http\Controllers\PortfolioController::class, 'post_detail'])->name('post_detail');
+Route::post('/message-store', [App\Http\Controllers\PortfolioController::class, 'message_store'])->name('message_store');

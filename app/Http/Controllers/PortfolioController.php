@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Message;
+use App\Models\Post;
 use App\Models\Project;
 use App\Models\Skill;
 use App\Models\Testimonial;
@@ -20,6 +22,7 @@ class PortfolioController extends Controller
         $educations   = Education::where('user_id', $user->id)->orderBy('id', 'desc')->limit(6)->get();
         $experiences  = Experience::where('user_id', $user->id)->orderBy('id', 'desc')->limit(6)->get();
         $testimonials = Testimonial::where('user_id', $user->id)->orderBy('id', 'desc')->limit(3)->get();
+        $posts        = Post::where('user_id', $user->id)->where('status', 'Publish')->orderBy('id', 'desc')->limit(3)->get();
 
         return view('portfolio.index', compact(
             'user',
@@ -28,6 +31,7 @@ class PortfolioController extends Controller
             'educations',
             'experiences',
             'testimonials',
+            'posts',
         ));
     }
 
@@ -84,5 +88,51 @@ class PortfolioController extends Controller
             'user',
             'testimonials',
         ));
+    }
+
+    public function post(string $username = null)
+    {
+        $user  = User::where('username', $username)->firstOrFail();
+        $posts = Post::where('user_id', $user->id)->where('status', 'Publish')->orderBy('id', 'desc')->paginate(10);
+
+        return view('portfolio.post', compact(
+            'user',
+            'posts',
+        ));
+    }
+
+    public function post_detail(string $username = null, string $id = null)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        $post = Post::findOrFail($id);
+
+        $post->increment('total_view');
+
+        return view('portfolio.post-detail', compact(
+            'user',
+            'post',
+        ));
+    }
+
+    public function message_store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+            'user_id' => 'required|integer',
+        ]);
+
+        Message::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+            'user_id' => $request->user_id,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Message sent successfully!',
+        ]);
     }
 }

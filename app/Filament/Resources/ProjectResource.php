@@ -108,12 +108,15 @@ class ProjectResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('title')
+                    ->label('Title')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label('Status')
                     ->sortable()
                     ->searchable(),
                 ImageColumn::make('image')
+                    ->label('Image')
                     ->width(50)
                     ->height(50)
                     ->sortable()

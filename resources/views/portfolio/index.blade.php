@@ -87,40 +87,11 @@
         <div class="mb-6 text-2xl font-bold">
             <div class="flex items-baseline justify-between">
                 <div>Recent <span class="bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent">Posts</span></div>
-                <div class="text-sm"><a href="/posts/">View all Posts →</a></div>
+                <div class="text-sm"><a href="{{ route('post', ['username' => $user->username]) }}">View all Posts →</a></div>
             </div>
         </div>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3"><a class="hover:translate-y-1" href="/posts/sixth-post/">
-                <div class="overflow-hidden rounded-md bg-slate-800">
-                    <div class="aspect-w-3 aspect-h-2"><img class="h-full w-full object-cover object-center" src="{{ asset('/') }}astro-boilerplate/assets/images/image-post.jpeg" alt="Image post" loading="lazy" /></div>
-                    <div class="px-3 pt-4 pb-6 text-center">
-                        <h2 class="text-xl font-semibold">Typography example</h2>
-                        <div class="mt-1 text-xs text-gray-400">Feb 6, 2020</div>
-                        <div class="mt-2 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non
-                            molestias eos excepturi.</div>
-                    </div>
-                </div>
-            </a><a class="hover:translate-y-1" href="/posts/fifth-post/">
-                <div class="overflow-hidden rounded-md bg-slate-800">
-                    <div class="aspect-w-3 aspect-h-2"><img class="h-full w-full object-cover object-center" src="{{ asset('/') }}astro-boilerplate/assets/images/image-post2.jpeg" alt="Image post 2" loading="lazy" /></div>
-                    <div class="px-3 pt-4 pb-6 text-center">
-                        <h2 class="text-xl font-semibold">5th Lorem ipsum dolor sit</h2>
-                        <div class="mt-1 text-xs text-gray-400">Feb 5, 2020</div>
-                        <div class="mt-2 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non
-                            molestias eos excepturi.</div>
-                    </div>
-                </div>
-            </a><a class="hover:translate-y-1" href="/posts/forth-post/">
-                <div class="overflow-hidden rounded-md bg-slate-800">
-                    <div class="aspect-w-3 aspect-h-2"><img class="h-full w-full object-cover object-center" src="{{ asset('/') }}astro-boilerplate/assets/images/image-post3.jpeg" alt="Image post 3" loading="lazy" /></div>
-                    <div class="px-3 pt-4 pb-6 text-center">
-                        <h2 class="text-xl font-semibold">4th Lorem ipsum dolor sit</h2>
-                        <div class="mt-1 text-xs text-gray-400">Feb 4, 2020</div>
-                        <div class="mt-2 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non
-                            molestias eos excepturi.</div>
-                    </div>
-                </div>
-            </a>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <x-post-data :posts="$posts" :user="$user" />
         </div>
     </div>
 
@@ -170,13 +141,35 @@
     <div class="mx-auto max-w-screen-lg px-3 py-6">
         <div class="mb-6 text-2xl font-bold">
             <div class="flex items-baseline justify-between">
-                <div><span class="bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent">Contact Me</span></div>
+                <div>
+                    <span class="bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent">Contact Me</span>
+                </div>
             </div>
         </div>
         <div class="flex flex-col gap-6">
-            <div class="grid md:grid-cols-2 grid-cols-1 gap-6">
-                {{--  --}}
-            </div>
+            <form id="message-form" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <div class="grid md:grid-cols-2 grid-cols-1 gap-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label block text-sm font-medium text-white">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter Name" class="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm text-gray-900" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label block text-sm font-medium text-white">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter Email" class="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm text-gray-900" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label block text-sm font-medium text-white">Message</label>
+                    <textarea name="message" id="message" rows="4" placeholder="Enter Message" class="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm text-gray-900" required></textarea>
+                </div>
+                <div>
+                    <button type="submit" id="sendMessageButton" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-sky-500 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                        Send Message
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
@@ -185,4 +178,57 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#message-form').on('submit', function(e) {
+                e.preventDefault();
+
+                let sendMessageButton = $('#sendMessageButton');
+                let formData = $(this).serialize();
+
+                sendMessageButton.attr('disabled', true).text('Sending...');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('message_store') }}',
+                    data: formData,
+                    success: function(response) {
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            showCloseButton: true,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+
+                        $('#message-form')[0].reset();
+
+                        sendMessageButton.attr('disabled', false).text('Send Message');
+                    },
+                    error: function(xhr) {
+                        let errorMessage = 'Something went wrong! Please try again later.';
+                        if (xhr.status === 422) {
+                            errorMessage = 'Validation failed. Please check your inputs.';
+                        }
+
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'error',
+                            title: errorMessage,
+                            showConfirmButton: false,
+                            showCloseButton: true,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+
+                        sendMessageButton.attr('disabled', false).text('Send Message');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

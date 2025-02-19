@@ -89,6 +89,7 @@ class EducationResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('degree')
+                    ->label('Degree')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('start_year')

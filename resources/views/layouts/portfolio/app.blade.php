@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}astro-boilerplate/_astro/index.CvLV1VIh.css" />
     {{-- enf astro boilerplate --}}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="{{ asset('/') }}fancybox/jquery.fancybox.min.css" />
 
     <style>
         [x-cloak] {
@@ -43,8 +43,10 @@
         @include('layouts.portfolio.footer')
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="{{ asset('/') }}jquery/jquery.min.js"></script>
+    <script src="{{ asset('/') }}fancybox/jquery.fancybox.min.js"></script>
+    <script src="{{ asset('/') }}sweetalert2/sweetalert2.js"></script>
+
     <script>
         $(document).ready(function() {
             $('[data-fancybox="gallery"]').fancybox();

@@ -158,12 +158,15 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Name')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('username')
+                    ->label('Username')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
+                    ->label('Email')
                     ->sortable()
                     ->searchable(),
                 ImageColumn::make('profile_picture')

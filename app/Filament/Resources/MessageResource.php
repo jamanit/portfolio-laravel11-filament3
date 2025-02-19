@@ -79,12 +79,15 @@ class MessageResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Name')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
+                    ->label('Email')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label('Status')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
