@@ -33,19 +33,19 @@ class UserSeeder extends Seeder
         $admin->assignRole('admin');
 
         $user = User::factory()->create([
-            'name'            => 'Riki',
-            'username'        => 'riki',
-            'email'           => 'riki@gmail.com',
+            'name'            => 'Riki David',
+            'username'        => 'riki_david',
+            'email'           => 'rikidavidtra.2310@gmail.com',
             'password'        => bcrypt('password'),
             'profile_picture' => null,
             'bio'             => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisi tellus, non imperdiet nisi tempor at. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
-            'phone_number'    => '+6285367630090',
-            'whatsapp_number' => '+6285367630090',
+            'phone_number'    => '+6289508475453',
+            'whatsapp_number' => '+6289508475453',
             'linkedin_url'    => 'https://www.linkedin.com/in/riki-david-a30752237',
             'github_url'      => 'https://github.com/jamanit',
-            'facebook_url'    => 'https://www.facebook.com',
+            'facebook_url'    => null,
             'instagram_url'   => 'https://www.instagram.com/riki_david_/',
-            'x_url'           => 'https://www.x.com',
+            'x_url'           => null,
             'youtube_url'     => 'https://www.youtube.com/@jaman_it',
         ]);
         $user->assignRole('user');

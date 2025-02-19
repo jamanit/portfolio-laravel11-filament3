@@ -16,6 +16,9 @@
                     @if ($user->phone_number)
                         <a href="tel:{{ $user->phone_number }}" target="_blank"><img class="h-12 w-12 hover:translate-y-1" src="{{ asset('/') }}astro-boilerplate/assets/images/phone-icon.png" alt="Phone icon" loading="lazy" /></a>
                     @endif
+                    @if ($user->email)
+                        <a href="mailto:{{ $user->email }}" target="_blank"><img class="h-12 w-12 hover:translate-y-1" src="{{ asset('/') }}astro-boilerplate/assets/images/email-icon.png" alt="Email icon" loading="lazy" /></a>
+                    @endif
                     @if ($user->whatsapp_number)
                         <a href="https://wa.me/{{ $user->whatsapp_number }}" target="_blank"><img class="h-12 w-12 hover:translate-y-1" src="{{ asset('/') }}astro-boilerplate/assets/images/whatsapp-icon.png" alt="WhatsApp icon" loading="lazy" /></a>
                     @endif
