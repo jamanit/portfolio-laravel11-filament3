@@ -35,6 +35,7 @@ class EducationResource extends Resource
             ->schema([
                 Select::make('user_id')
                     ->label('User')
+                    // ->placeholder('')
                     ->required()
                     ->options(
                         User::all()->pluck('name', 'id')->toArray()
@@ -42,28 +43,40 @@ class EducationResource extends Resource
                     ->preload()
                     ->searchable(),
                 TextInput::make('school_name')
-                    ->placeholder('School Name')
+                    ->label('School Name')
+                    ->placeholder('Enter School Name')
                     ->required()
+                    ->string()
                     ->maxLength(255),
                 Select::make('degree')
+                    ->label('Degree')
+                    // ->placeholder('')
                     ->required()
                     ->options([
-                        'Elementary' => 'SD (Elementary)',
-                        'JuniorHigh' => 'SMP (Junior High)',
-                        'SeniorHigh' => 'SMA (Senior High)',
-                        'Diploma' => 'Diploma',
-                        'Bachelor' => 'S1 (Bachelor\'s Degree)',
-                        'Master' => 'S2 (Master\'s Degree)',
-                        'Doctor' => 'S3 (Doctoral Degree)',
+                        'SD (Elementary)'         => 'SD (Elementary)',
+                        'SMP (Junior High)'       => 'SMP (Junior High)',
+                        'SMA (Senior High)'       => 'SMA (Senior High)',
+                        'Diploma'                 => 'Diploma',
+                        'S1 (Bachelor\'s Degree)' => 'S1 (Bachelor\'s Degree)',
+                        'S2 (Master\'s Degree)'   => 'S2 (Master\'s Degree)',
+                        'S3 (Doctoral Degree)'    => 'S3 (Doctoral Degree)',
                     ]),
-                TextInput::make('start_date')
-                    ->placeholder('Start Date')
+                TextInput::make('start_year')
+                    ->label('Start Year')
+                    ->placeholder('YYYY')
                     ->required()
-                    ->type('date'),
-                TextInput::make('end_date')
-                    ->placeholder('End Date')
-                    ->type('date'),
-                TextArea::make('description'),
+                    ->type('number'),
+                TextInput::make('end_year')
+                    ->label('End Year')
+                    ->placeholder('YYYY')
+                    ->nullable()
+                    ->type('number'),
+                TextArea::make('description')
+                    ->label('Description')
+                    ->placeholder('Enter Description')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(1000),
             ]);
     }
 
@@ -78,12 +91,12 @@ class EducationResource extends Resource
                 TextColumn::make('degree')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('start_date')
-                    ->label('Start Date')
+                TextColumn::make('start_year')
+                    ->label('Start Year')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('end_date')
-                    ->label('End Date')
+                TextColumn::make('end_year')
+                    ->label('End Year')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
@@ -120,9 +133,9 @@ class EducationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEducation::route('/'),
+            'index'  => Pages\ListEducation::route('/'),
             'create' => Pages\CreateEducation::route('/create'),
-            'edit' => Pages\EditEducation::route('/{record}/edit'),
+            'edit'   => Pages\EditEducation::route('/{record}/edit'),
         ];
     }
 }

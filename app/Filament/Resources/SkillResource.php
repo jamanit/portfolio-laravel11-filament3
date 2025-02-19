@@ -35,6 +35,7 @@ class SkillResource extends Resource
             ->schema([
                 Select::make('user_id')
                     ->label('User')
+                    // ->placeholder('')
                     ->required()
                     ->options(
                         User::all()->pluck('name', 'id')->toArray()
@@ -43,11 +44,13 @@ class SkillResource extends Resource
                     ->searchable(),
                 TextInput::make('skill_name')
                     ->label('Skill Name')
-                    ->placeholder('Skill Name')
+                    ->placeholder('Enter Skill Name')
                     ->required()
+                    ->string()
                     ->maxLength(255),
                 Select::make('skill_level')
                     ->label('Level')
+                    // ->placeholder('')
                     ->required()
                     ->options([
                         'Beginner' => 'Beginner',
@@ -56,6 +59,12 @@ class SkillResource extends Resource
                         'Expert' => 'Expert',
                         'Master' => 'Master',
                     ]),
+                TextArea::make('caption')
+                    ->label('Caption')
+                    ->placeholder('Enter Caption')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(5000),
             ]);
     }
 

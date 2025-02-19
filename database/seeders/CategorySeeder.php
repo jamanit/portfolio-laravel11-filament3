@@ -16,6 +16,12 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Category 1',
             ],
+            [
+                'name' => 'Category 2',
+            ],
+            [
+                'name' => 'Category 3',
+            ],
         ];
         foreach ($data as $item) {
             \App\Models\Category::updateOrCreate(['name' => $item['name']], $item);

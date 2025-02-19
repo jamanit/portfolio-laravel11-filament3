@@ -36,34 +36,54 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->placeholder('Name')
+                    ->label('Name')
+                    ->placeholder('Enter Name')
                     ->required()
-                    ->maxLength(255),
+                    ->string()
+                    ->maxLength(50),
+                TextInput::make('username')
+                    ->label('Username')
+                    ->placeholder('Enter Username')
+                    ->required()
+                    ->string()
+                    ->maxLength(100)
+                    ->unique(ignoreRecord: true)
+                    ->hidden(fn(string $context): bool => $context === 'create'),
                 TextInput::make('email')
-                    ->placeholder('Email')
+                    ->label('Email')
+                    ->placeholder('Enter Email')
                     ->required()
+                    ->string()
+                    ->maxLength(100)
                     ->email()
-                    ->maxLength(255),
+                    ->unique(ignoreRecord: true),
                 TextInput::make('password')
-                    ->placeholder('Password')
+                    ->label('Password')
+                    ->placeholder('Enter Password')
                     ->password()
                     ->required(fn(string $context): bool => $context === 'create')
+                    ->string()
+                    ->minLength(6)
                     ->dehydrated(fn($state) => !empty($state))
-                    ->confirmed()
-                    ->minLength(8),
+                    ->confirmed(),
                 TextInput::make('password_confirmation')
-                    ->placeholder('Confirm Password')
+                    ->label('Confirm Password')
+                    ->placeholder('Enter Confirm Password')
                     ->password()
                     ->required(fn(string $context): bool => $context === 'create')
-                    ->dehydrated(fn($state) => !empty($state))
-                    ->minLength(8),
+                    ->string()
+                    ->minLength(6)
+                    ->dehydrated(fn($state) => !empty($state)),
                 FileUpload::make('profile_picture')
                     ->label('Profile Picture')
+                    ->placeholder('')
+                    ->nullable()
                     ->image()
                     ->directory('users')
                     ->disk('public')
                     ->enableOpen()
                     ->enableDownload()
+                    ->maxSize(5048)
                     ->deleteUploadedFileUsing(function ($file, $record) {
                         Storage::disk('public')->delete($file);
 
@@ -71,16 +91,65 @@ class UserResource extends Resource
                             'profile_picture' => null,
                         ]);
                     }),
+                RichEditor::make('bio')
+                    ->label('Bio')
+                    ->placeholder('Enter Bio')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(5000)
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('/users/bio')
+                    ->columnSpan('full'),
                 TextInput::make('phone_number')
                     ->label('Phone Number')
-                    ->placeholder('Phone Number')
-                    ->type('number')
+                    ->placeholder('Enter Phone Number')
+                    ->nullable()
+                    ->numeric()
+                    ->type('tel')
+                    ->tel(),
+                TextInput::make('whatsapp_number')
+                    ->label('WhatsApp Number')
+                    ->placeholder('Enter WhatsApp Number')
+                    ->nullable()
+                    ->numeric()
+                    ->type('tel')
+                    ->tel(),
+                TextInput::make('linkedin_url')
+                    ->label('LinkedIn URL')
+                    ->placeholder('Enter LinkedIn URL')
+                    ->nullable()
+                    ->string()
                     ->maxLength(255),
-                RichEditor::make('bio')
-                    ->placeholder('Bio')
-                    ->columnSpan('full')
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsDirectory('/users/bio'),
+                TextInput::make('github_url')
+                    ->label('GitHub URL')
+                    ->placeholder('Enter GitHub URL')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(255),
+                TextInput::make('facebook_url')
+                    ->label('Facebook URL')
+                    ->placeholder('Enter Facebook URL')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(255),
+                TextInput::make('instagram_url')
+                    ->label('Instagram URL')
+                    ->placeholder('Enter Instagram URL')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(255),
+                TextInput::make('x_url')
+                    ->label('X URL')
+                    ->placeholder('Enter X URL')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(255),
+                TextInput::make('youtube_url')
+                    ->label('YouTube URL')
+                    ->placeholder('Enter YouTube URL')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(255),
             ]);
     }
 
@@ -91,6 +160,9 @@ class UserResource extends Resource
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('username')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
@@ -98,10 +170,6 @@ class UserResource extends Resource
                     ->label('Profile Picture')
                     ->width(50)
                     ->height(50)
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('phone_number')
-                    ->label('Phone Number')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -139,8 +207,8 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            // 'create' => Pages\CreateUser::route('/create'),
-            // 'edit' => Pages\EditUser::route('/{record}/edit'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

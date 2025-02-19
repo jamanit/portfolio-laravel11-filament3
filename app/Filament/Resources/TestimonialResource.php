@@ -35,6 +35,7 @@ class TestimonialResource extends Resource
             ->schema([
                 Select::make('user_id')
                     ->label('User')
+                    // ->placeholder('')
                     ->required()
                     ->options(
                         User::all()->pluck('name', 'id')->toArray()
@@ -42,13 +43,21 @@ class TestimonialResource extends Resource
                     ->preload()
                     ->searchable(),
                 TextInput::make('client_name')
-                    ->placeholder('Client Name')
+                    ->label('Client Name')
+                    ->placeholder('Enter Client Name')
                     ->required()
+                    ->string()
                     ->maxLength(255),
                 TextArea::make('testimonial_text')
-                    ->required(),
+                    ->label('Testimonial Text')
+                    ->placeholder('Enter Testimonial Text')
+                    ->required()
+                    ->string()
+                    ->maxLength(5000),
                 FileUpload::make('client_image')
                     ->label('Client Image')
+                    ->placeholder('')
+                    ->nullable()
                     ->image()
                     ->directory('testimonials')
                     ->disk('public')

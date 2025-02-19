@@ -15,22 +15,38 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::factory()->create([
-            'name'            => 'Admin',
-            'email'           => 'admin@gmail.com',
+            'name'            => 'Super Admin',
+            'username'        => 'superadmin',
+            'email'           => 'superadmin@gmail.com',
             'password'        => bcrypt('password'),
             'profile_picture' => null,
+            'bio'             => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisi tellus, non imperdiet nisi tempor at. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
             'phone_number'    => null,
-            'bio'             => null,
+            'whatsapp_number' => null,
+            'linkedin_url'    => null,
+            'github_url'      => null,
+            'facebook_url'    => null,
+            'instagram_url'   => null,
+            'x_url'           => null,
+            'youtube_url'     => null,
         ]);
         $admin->assignRole('admin');
 
         $user = User::factory()->create([
-            'name'            => 'User',
-            'email'           => 'user@gmail.com',
+            'name'            => 'Riki',
+            'username'        => 'riki',
+            'email'           => 'riki@gmail.com',
             'password'        => bcrypt('password'),
             'profile_picture' => null,
-            'phone_number'    => null,
-            'bio'             => null,
+            'bio'             => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisi tellus, non imperdiet nisi tempor at. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+            'phone_number'    => '+6285367630090',
+            'whatsapp_number' => '+6285367630090',
+            'linkedin_url'    => 'https://www.linkedin.com/in/riki-david-a30752237',
+            'github_url'      => 'https://github.com/jamanit',
+            'facebook_url'    => 'https://www.facebook.com',
+            'instagram_url'   => 'https://www.instagram.com/riki_david_/',
+            'x_url'           => 'https://www.x.com',
+            'youtube_url'     => 'https://www.youtube.com/@jaman_it',
         ]);
         $user->assignRole('user');
     }

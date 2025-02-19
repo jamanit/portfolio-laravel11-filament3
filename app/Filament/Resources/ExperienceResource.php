@@ -35,6 +35,7 @@ class ExperienceResource extends Resource
             ->schema([
                 Select::make('user_id')
                     ->label('User')
+                    // ->placeholder('')
                     ->required()
                     ->options(
                         User::all()->pluck('name', 'id')->toArray()
@@ -42,22 +43,33 @@ class ExperienceResource extends Resource
                     ->preload()
                     ->searchable(),
                 TextInput::make('job_title')
-                    ->placeholder('Job Title')
+                    ->label('Job Title')
+                    ->placeholder('Enter Job Title')
                     ->required()
+                    ->string()
                     ->maxLength(255),
                 TextInput::make('company_name')
-                    ->placeholder('Company Name')
+                    ->label('Company Name')
+                    ->placeholder('Enter Company Name')
                     ->required()
+                    ->string()
                     ->maxLength(255),
-                TextInput::make('start_date')
-                    ->placeholder('Start Date')
+                TextInput::make('start_year')
+                    ->label('Start Year')
+                    ->placeholder('YYYY')
                     ->required()
-                    ->type('date'),
-                TextInput::make('end_date')
-                    ->placeholder('End Date')
-                    ->type('date'),
+                    ->type('number'),
+                TextInput::make('end_year')
+                    ->label('End Year')
+                    ->placeholder('YYYY')
+                    ->nullable()
+                    ->type('number'),
                 TextArea::make('job_description')
-                    ->placeholder('Job Description'),
+                    ->label('Job Description')
+                    ->placeholder('Enter Job Description')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(1000),
             ]);
     }
 
@@ -73,12 +85,12 @@ class ExperienceResource extends Resource
                     ->label('Company Name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('start_date')
-                    ->label('Start Date')
+                TextColumn::make('start_year')
+                    ->label('Start Year')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('end_date')
-                    ->label('End Date')
+                TextColumn::make('end_year')
+                    ->label('End Year')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')

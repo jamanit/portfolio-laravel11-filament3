@@ -37,6 +37,7 @@ class MessageResource extends Resource
             ->schema([
                 Select::make('user_id')
                     ->label('User')
+                    // ->placeholder('')
                     ->required()
                     ->options(
                         User::all()->pluck('name', 'id')->toArray()
@@ -44,15 +45,26 @@ class MessageResource extends Resource
                     ->preload()
                     ->searchable(),
                 TextInput::make('name')
+                    ->label('Name')
+                    ->placeholder('Enter Name')
                     ->required()
+                    ->string()
                     ->maxLength(255),
                 TextInput::make('email')
+                    ->label('Email')
+                    ->placeholder('Enter Email')
                     ->required()
                     ->type('email')
                     ->maxLength(255),
                 TextArea::make('message')
-                    ->required(),
+                    ->label('Message')
+                    ->placeholder('Enter Message')
+                    ->required()
+                    ->string()
+                    ->maxLength(5000),
                 Select::make('status')
+                    ->label('Status')
+                    // ->placeholder('')
                     ->required()
                     ->options([
                         'Pending' => 'Pending',

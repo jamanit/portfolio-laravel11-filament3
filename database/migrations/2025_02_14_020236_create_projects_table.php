@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->string('title');
+            $table->enum('status', ['Active', 'Inactive', 'Completed'])->default('Active');
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->string('project_url')->nullable();
+            $table->text('labels')->nullable();
             $table->timestamps();
         });
     }

@@ -35,19 +35,39 @@ class ProjectResource extends Resource
             ->schema([
                 Select::make('user_id')
                     ->label('User')
+                    // ->placeholder('')
                     ->required()
                     ->options(
                         User::all()->pluck('name', 'id')->toArray()
                     )
                     ->preload()
                     ->searchable(),
+                Select::make('category_id')
+                    ->label('Category')
+                    // ->placeholder('')
+                    ->nullable()
+                    ->relationship('category', 'name')
+                    ->preload()
+                    ->searchable(),
                 TextInput::make('title')
                     ->label('Title')
-                    ->placeholder('Title')
+                    ->placeholder('Enter Title')
                     ->required()
+                    ->string()
                     ->maxLength(255),
+                Select::make('status')
+                    ->label('Status')
+                    // ->placeholder('')
+                    ->required()
+                    ->options([
+                        'Active'    => 'Active',
+                        'Inactive'  => 'Inactive',
+                        'Completed' => 'Completed',
+                    ]),
                 FileUpload::make('image')
                     ->label('Image')
+                    ->placeholder('')
+                    ->nullable()
                     ->image()
                     ->directory('projects')
                     ->disk('public')
@@ -60,16 +80,22 @@ class ProjectResource extends Resource
                             'image' => null,
                         ]);
                     }),
-                TextInput::make('project_url')
-                    ->label('Project Url')
-                    ->placeholder('Project Url')
-                    ->type('url')
-                    ->maxLength(500),
                 RichEditor::make('description')
-                    ->placeholder('Description')
+                    ->label('Description')
+                    ->placeholder('Enter Description')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(5000)
                     ->columnSpan('full')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('/projects/description'),
+                TextArea::make('labels')
+                    ->label('Labels')
+                    ->placeholder('Enter labels separated by commas (e.g., Tech, Web, Design)')
+                    ->helperText('Type labels separated by commas.')
+                    ->nullable()
+                    ->regex('/^[a-zA-Z0-9\s,]+$/')
+                    ->maxLength(255),
             ]);
     }
 
@@ -77,7 +103,14 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('title')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('status')
                     ->sortable()
                     ->searchable(),
                 ImageColumn::make('image')
@@ -119,9 +152,9 @@ class ProjectResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjects::route('/'),
+            'index'  => Pages\ListProjects::route('/'),
             'create' => Pages\CreateProject::route('/create'),
-            'edit' => Pages\EditProject::route('/{record}/edit'),
+            'edit'   => Pages\EditProject::route('/{record}/edit'),
         ];
     }
 }
