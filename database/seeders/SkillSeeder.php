@@ -15,9 +15,39 @@ class SkillSeeder extends Seeder
         $data = [
             [
                 'user_id'     => 2,
-                'skill_name'  => 'Skill Name',
+                'skill_name'  => 'Language Programming',
                 'skill_level' => 'Expert',
-                'caption'     => 'This is a caption for Skill',
+                'caption'     => 'PHP, JavaScript, CSS',
+            ],
+            [
+                'user_id'     => 2,
+                'skill_name'  => 'Framework',
+                'skill_level' => 'Expert',
+                'caption'     => 'Laravel, ExpressJS, ReactJS, NextJS, Codeigniter',
+            ],
+            [
+                'user_id'     => 2,
+                'skill_name'  => 'Database Management',
+                'skill_level' => 'Expert',
+                'caption'     => 'PostgreSQL, MySQL',
+            ],
+            [
+                'user_id'     => 2,
+                'skill_name'  => 'Library',
+                'skill_level' => 'Expert',
+                'caption'     => 'TailwindCSS, Boostrap, Leaflet, JQuery, Yajra Serverside, Intervention Image, Filament',
+            ],
+            [
+                'user_id'     => 2,
+                'skill_name'  => 'Tools',
+                'skill_level' => 'Expert',
+                'caption'     => 'GitHub, Trello, VSCode',
+            ],
+            [
+                'user_id'     => 2,
+                'skill_name'  => 'Others',
+                'skill_level' => 'Expert',
+                'caption'     => 'Memperbaiki komputer dan ponsel, Desain grafis',
             ],
         ];
         foreach ($data as $item) {

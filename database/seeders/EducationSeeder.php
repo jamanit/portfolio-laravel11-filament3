@@ -15,11 +15,19 @@ class EducationSeeder extends Seeder
         $data = [
             [
                 'user_id'     => 2,
+                'school_name' => 'SMK Negeri 1 Kota Jambi',
+                'degree'      => 'SMA (Senior High)',
+                'start_year'  => '2013',
+                'end_year'    => '2016',
+                'description' => null,
+            ],
+            [
+                'user_id'     => 2,
                 'school_name' => 'Universitas Nurdin Hamzah',
                 'degree'      => 'S1 (Bachelor\'s Degree)',
                 'start_year'  => '2017',
                 'end_year'    => '2021',
-                'description' => 'This is a description for Education',
+                'description' => null,
             ],
         ];
         foreach ($data as $item) {
