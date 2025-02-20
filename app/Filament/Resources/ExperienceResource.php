@@ -54,13 +54,13 @@ class ExperienceResource extends Resource
                     ->required()
                     ->string()
                     ->maxLength(255),
-                TextInput::make('start_year')
-                    ->label('Start Year')
+                TextInput::make('start_date')
+                    ->label('Start Date')
                     ->placeholder('YYYY')
                     ->required()
                     ->type('number'),
-                TextInput::make('end_year')
-                    ->label('End Year')
+                TextInput::make('end_date')
+                    ->label('End Date')
                     ->placeholder('YYYY')
                     ->nullable()
                     ->type('number'),
@@ -93,12 +93,12 @@ class ExperienceResource extends Resource
                     ->label('Company Name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('start_year')
-                    ->label('Start Year')
+                TextColumn::make('start_date')
+                    ->label('Start Date')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('end_year')
-                    ->label('End Year')
+                TextColumn::make('end_date')
+                    ->label('End Date')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')

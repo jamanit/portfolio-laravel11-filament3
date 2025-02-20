@@ -17,8 +17,8 @@ class ExperienceSeeder extends Seeder
                 'user_id'         => 2,
                 'job_title'       => 'Programmer',
                 'company_name'    => 'PT Pulau Sambu Guntung',
-                'start_year'      => '2017',
-                'end_year'        => '2021',
+                'start_date'      => '2017-10-01',
+                'end_date'        => '2021-10-01',
                 'job_description' => 'This is a description for Experience',
             ],
         ];

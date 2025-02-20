@@ -8,9 +8,9 @@
                 <div class="text-xl font-semibold">{{ $experience->job_title }}</div>
                 <div class="text-xl font-semibold">{{ $experience->company_name }}</div>
                 <div class="mt-3 flex flex-wrap gap-2">
-                    <div class="rounded-md px-2 py-1 text-xs font-semibold bg-fuchsia-400 text-fuchsia-900">{{ $experience->start_year }}</div>
+                    <div class="rounded-md px-2 py-1 text-xs font-semibold bg-fuchsia-400 text-fuchsia-900">{{ date('m-Y', strtotime($experience->start_date)) }}</div>
                     <p>to</p>
-                    <div class="rounded-md px-2 py-1 text-xs font-semibold bg-green-400 text-green-900">{{ $experience->end_year ? $experience->end_year : 'Present' }}</div>
+                    <div class="rounded-md px-2 py-1 text-xs font-semibold bg-green-400 text-green-900">{{ $experience->end_date ? date('m-Y', strtotime($experience->end_date)) : 'Present' }}</div>
                 </div>
                 @if ($experience->job_description)
                     <div class="mt-3 text-gray-400">{!! str($experience->job_description)->sanitizeHtml() !!}</div>
