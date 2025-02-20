@@ -56,14 +56,14 @@ class ExperienceResource extends Resource
                     ->maxLength(255),
                 TextInput::make('start_date')
                     ->label('Start Date')
-                    ->placeholder('YYYY')
+                    ->placeholder('')
                     ->required()
-                    ->type('number'),
+                    ->type('date'),
                 TextInput::make('end_date')
                     ->label('End Date')
-                    ->placeholder('YYYY')
+                    ->placeholder('')
                     ->nullable()
-                    ->type('number'),
+                    ->type('date'),
                 RichEditor::make('job_description')
                     ->label('Job Description')
                     ->placeholder('Enter Job Description')
