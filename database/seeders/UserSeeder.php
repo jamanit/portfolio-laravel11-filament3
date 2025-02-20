@@ -29,6 +29,7 @@ class UserSeeder extends Seeder
             'instagram_url'   => null,
             'x_url'           => null,
             'youtube_url'     => null,
+            'portfolio_view'  => null,
         ]);
         $admin->assignRole('admin');
 
@@ -47,6 +48,7 @@ class UserSeeder extends Seeder
             'instagram_url'   => 'https://www.instagram.com/riki_david_/',
             'x_url'           => null,
             'youtube_url'     => 'https://www.youtube.com/@jaman_it',
+            'portfolio_view'  => null,
         ]);
         $user->assignRole('user');
     }

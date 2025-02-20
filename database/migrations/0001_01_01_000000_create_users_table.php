@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('instagram_url')->nullable();
             $table->string('x_url')->nullable();
             $table->string('youtube_url')->nullable();
+            $table->integer('portfolio_view')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

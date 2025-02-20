@@ -181,6 +181,10 @@ class UserResource extends Resource
                     ->height(50)
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('portfolio_view')
+                    ->label('Portfolio View')
+                    ->sortable()
+                    ->searchable(),
                 ViewColumn::make('portfolio')
                     ->label('Portfolio')
                     ->view('components.view-portfolio-button'),
