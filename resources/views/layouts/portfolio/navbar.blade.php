@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-screen-lg px-3 py-6">
     <div class="flex flex-col gap-y-3 gap-x-3 sm:flex-row sm:items-center sm:justify-between">
-        <a href="{{ env('APP_OWNER_URL') }}" target="_blank">
+        <a href="{{ url('/') }}" target="_blank">
             <div class="flex items-center bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-xl font-bold text-transparent">
                 <svg class="mr-1 h-10 w-10 stroke-cyan-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M0 0h24v24H0z" stroke="none"></path>
