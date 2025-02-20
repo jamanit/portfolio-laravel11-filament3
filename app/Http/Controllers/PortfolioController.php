@@ -12,6 +12,9 @@ use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MessageMail;
+
 class PortfolioController extends Controller
 {
     public function index(string $username = null)
@@ -117,21 +120,23 @@ class PortfolioController extends Controller
     public function message_store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
             'message' => 'required|string',
             'user_id' => 'required|integer',
         ]);
 
-        Message::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        $data = Message::create([
+            'name'    => $request->name,
+            'email'   => $request->email,
             'message' => $request->message,
             'user_id' => $request->user_id,
         ]);
 
+        Mail::to(['itservice.jaman@gmail.com'])->send(new MessageMail($data));
+
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Message sent successfully!',
         ]);
     }

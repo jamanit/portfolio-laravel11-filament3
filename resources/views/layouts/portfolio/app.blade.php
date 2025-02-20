@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $user->name ? $user->name : 'Name' }} | {{ config('app.name') }} - @yield('title') </title>
+    <title>{{ $user->name ? $user->name : 'Name' }} | {{ config('app.name') }} - @yield('title')</title>
 
     {{-- astro boilerplate --}}
     <meta name="description" content="Boilerplate built with Astro using React and Tailwind CSS">
