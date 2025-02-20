@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->text('labels')->nullable();
-            $table->integer('total_view')->nullable();
+            $table->integer('total_view')->default(0);
             $table->timestamps();
         });
     }

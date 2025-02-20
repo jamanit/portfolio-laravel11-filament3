@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
                 'image'       => null,
                 'description' => 'This is a description for Post',
                 'labels'      => 'Laravel 11, Filament, GitHub',
-                'total_view'  => 100,
+                'total_view'  => 0,
             ],
         ];
         foreach ($data as $item) {

@@ -27,10 +27,10 @@ class PortfolioController extends Controller
         $testimonials = Testimonial::where('user_id', $user->id)->orderBy('id', 'desc')->limit(3)->get();
         $posts        = Post::where('user_id', $user->id)->where('status', 'Publish')->orderBy('id', 'desc')->limit(3)->get();
 
-        if (!session()->has('viewed_portfolio_' . $user->id)) {
+        if (!session()->has('viewed_portfolio')) {
             $user->increment('portfolio_view');
 
-            session(['viewed_portfolio_' . $user->id => true]);
+            session(['viewed_portfolio' => $user->username]);
         }
 
         return view('portfolio.index', compact(
