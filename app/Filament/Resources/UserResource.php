@@ -23,6 +23,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Columns\ViewColumn;
 
 class UserResource extends Resource
 {
@@ -175,6 +176,9 @@ class UserResource extends Resource
                     ->height(50)
                     ->sortable()
                     ->searchable(),
+                ViewColumn::make('portfolio')
+                    ->label('Portfolio')
+                    ->view('components.view-portfolio-button'),
                 TextColumn::make('created_at')
                     ->label('Created At')
                     ->dateTime()
