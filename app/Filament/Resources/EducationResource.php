@@ -71,12 +71,20 @@ class EducationResource extends Resource
                     ->placeholder('YYYY')
                     ->nullable()
                     ->type('number'),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->label('Description')
                     ->placeholder('Enter Description')
                     ->nullable()
                     ->string()
-                    ->maxLength(1000),
+                    ->maxLength(500)
+                    ->columnSpan('full')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'redo',
+                        'undo',
+                    ]),
             ]);
     }
 

@@ -59,12 +59,20 @@ class SkillResource extends Resource
                         'Expert' => 'Expert',
                         'Master' => 'Master',
                     ]),
-                Textarea::make('caption')
+                RichEditor::make('caption')
                     ->label('Caption')
                     ->placeholder('Enter Caption')
                     ->nullable()
                     ->string()
-                    ->maxLength(5000),
+                    ->maxLength(500)
+                    ->columnSpan('full')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'redo',
+                        'undo',
+                    ]),
             ]);
     }
 

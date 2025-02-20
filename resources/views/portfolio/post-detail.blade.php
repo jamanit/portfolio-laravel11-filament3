@@ -32,13 +32,23 @@
                 <div class="rounded-md px-2 py-1 text-xs font-semibold bg-sky-400 text-sky-900 text-nowrap">{{ $post->status }}</div>
             </div>
             <div class="mt-8 prose prose-invert prose-img:rounded-lg">
-                {!! $post->description !!}
+                {!! str($post->description)->sanitizeHtml() !!}
             </div>
             <div class="mt-6 flex flex-wrap gap-2">
-                <div class="rounded-md px-2 py-1 text-xs font-semibold bg-fuchsia-400 text-fuchsia-900">Astro.js</div>
-                <div class="rounded-md px-2 py-1 text-xs font-semibold bg-lime-400 text-lime-900">Web design</div>
-                <div class="rounded-md px-2 py-1 text-xs font-semibold bg-sky-400 text-sky-900">Tailwind.css</div>
-                <div class="rounded-md px-2 py-1 text-xs font-semibold bg-rose-400 text-rose-900">TypeScript</div>
+                @php
+                    $colors = ['bg-fuchsia-400 text-fuchsia-900', 'bg-lime-400 text-lime-900', 'bg-sky-400 text-sky-900', 'bg-rose-400 text-rose-900', 'bg-yellow-400 text-yellow-900', 'bg-purple-400 text-purple-900', 'bg-green-400 text-green-900', 'bg-blue-400 text-blue-900'];
+                @endphp
+
+                @if (!empty($post->labels))
+                    @foreach (explode(', ', $post->labels) as $label)
+                        @php
+                            $randomColor = $colors[array_rand($colors)];
+                        @endphp
+                        <div class="rounded-md px-2 py-1 text-xs font-semibold {{ $randomColor }}">
+                            {{ $label }}
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

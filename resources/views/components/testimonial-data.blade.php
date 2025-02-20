@@ -11,7 +11,7 @@
                 </div>
                 <div class="px-3 pt-4 pb-6 text-center">
                     <h2 class="text-xl font-semibold">{{ $testimonial->client_name }}</h2>
-                    <div class="mt-2 text-sm">{!! $testimonial->testimonial_text !!}</div>
+                    <div class="mt-2 text-sm">{!! str($testimonial->testimonial_text)->sanitizeHtml() !!}</div>
                 </div>
             </div>
         </div>

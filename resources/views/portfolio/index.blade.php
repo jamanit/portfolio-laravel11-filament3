@@ -10,7 +10,7 @@
             <div>
                 <h1 class="text-3xl font-bold">Hi there, I&#x27;m <span class="bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent">{{ $user->name }}</span> 👋</h1>
                 @if ($user->bio)
-                    <p class="mt-6 text-xl leading-9">{!! $user->bio !!}</p>
+                    <div class="mt-6">{!! str($user->bio)->sanitizeHtml() !!}</div>
                 @endif
                 <div class="mt-3 flex gap-1">
                     @if ($user->phone_number)
@@ -117,7 +117,7 @@
                                     <div class="rounded-md px-2 py-1 text-xs font-semibold bg-green-400 text-green-900">{{ $education->end_year ? $education->end_year : 'Present' }}</div>
                                 </div>
                                 @if ($education->description)
-                                    <p class="mt-3 text-gray-400">{!! $education->description !!}</p>
+                                    <div class="mt-3 text-gray-400">{!! str($education->description)->sanitizeHtml() !!}</div>
                                 @endif
                             </div>
                         </div>

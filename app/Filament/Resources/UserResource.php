@@ -97,10 +97,15 @@ class UserResource extends Resource
                     ->placeholder('Enter Bio')
                     ->nullable()
                     ->string()
-                    ->maxLength(5000)
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsDirectory('/users/bio')
-                    ->columnSpan('full'),
+                    ->maxLength(2000)
+                    ->columnSpan('full')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'redo',
+                        'undo',
+                    ]),
                 TextInput::make('phone_number')
                     ->label('Phone Number')
                     ->placeholder('Enter Phone Number')

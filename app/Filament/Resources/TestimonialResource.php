@@ -48,12 +48,6 @@ class TestimonialResource extends Resource
                     ->required()
                     ->string()
                     ->maxLength(255),
-                Textarea::make('testimonial_text')
-                    ->label('Testimonial Text')
-                    ->placeholder('Enter Testimonial Text')
-                    ->required()
-                    ->string()
-                    ->maxLength(5000),
                 FileUpload::make('client_image')
                     ->label('Client Image')
                     ->placeholder('')
@@ -70,6 +64,20 @@ class TestimonialResource extends Resource
                             'client_image' => null,
                         ]);
                     }),
+                RichEditor::make('testimonial_text')
+                    ->label('Testimonial Text')
+                    ->placeholder('Enter Testimonial Text')
+                    ->nullable()
+                    ->string()
+                    ->maxLength(500)
+                    ->columnSpan('full')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'redo',
+                        'undo',
+                    ]),
             ]);
     }
 
@@ -117,8 +125,8 @@ class TestimonialResource extends Resource
     {
         return [
             'index' => Pages\ListTestimonials::route('/'),
-            'create' => Pages\CreateTestimonial::route('/create'),
-            'edit' => Pages\EditTestimonial::route('/{record}/edit'),
+            // 'create' => Pages\CreateTestimonial::route('/create'),
+            // 'edit' => Pages\EditTestimonial::route('/{record}/edit'),
         ];
     }
 }

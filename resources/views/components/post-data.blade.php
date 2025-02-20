@@ -17,7 +17,7 @@
                         @endif
                     </div>
                     <div class="mt-1 text-xs text-gray-400">{{ $post->created_at }}</div>
-                    <div class="mt-3 text-sm" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{!! $post->description !!}</div>
+                    <div class="mt-3 text-sm" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{!! str($post->description)->sanitizeHtml() !!}</div>
                 </div>
             </div>
         </a>

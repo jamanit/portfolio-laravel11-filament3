@@ -21,7 +21,7 @@
 
         <p class="mb-2"><strong class="font-medium">Name:</strong> <span class="text-gray-600">{{ $data->name }}</span></p>
         <p class="mb-2"><strong class="font-medium">Email:</strong> <span class="text-gray-600">{{ $data->email }}</span></p>
-        <p class="mb-4"><strong class="font-medium">Message:</strong> <span class="text-gray-600">{{ $data->message }}</span></p>
+        <p class="mb-4"><strong class="font-medium">Message:</strong> <span class="text-gray-600">{!! str($data->message)->sanitizeHtml() !!}</span></p>
 
         <footer class="border-t border-gray-200 pt-4 mt-6 text-center text-sm text-gray-500">
             <p>© Copyright 2025 <a href="{{ config('app.url') }}" target="_blank" class="text-cyan-400 hover:underline" rel="noopener noreferrer">{{ config('app.name') }}</a> by <a href="{{ env('APP_OWNER_URL') }}" target="_blank" class="text-cyan-400 hover:underline" rel="noopener noreferrer">{{ env('APP_OWNER_NAME') }}</a>. All rights reserved.</p>

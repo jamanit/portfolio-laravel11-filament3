@@ -10,7 +10,7 @@
                     <div class="rounded-md px-2 py-1 text-xs font-semibold bg-fuchsia-400 text-fuchsia-900 text-nowrap">{{ $skill->skill_level }}</div>
                 </div>
                 @if ($skill->caption)
-                    <p class="mt-3 text-gray-400">{!! $skill->caption !!}</p>
+                    <div class="mt-3 text-gray-400">{!! str($skill->caption)->sanitizeHtml() !!}</div>
                 @endif
             </div>
         </div>

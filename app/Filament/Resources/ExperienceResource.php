@@ -64,12 +64,20 @@ class ExperienceResource extends Resource
                     ->placeholder('YYYY')
                     ->nullable()
                     ->type('number'),
-                Textarea::make('job_description')
+                RichEditor::make('job_description')
                     ->label('Job Description')
                     ->placeholder('Enter Job Description')
                     ->nullable()
                     ->string()
-                    ->maxLength(1000),
+                    ->maxLength(3000)
+                    ->columnSpan('full')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'redo',
+                        'undo',
+                    ]),
             ]);
     }
 

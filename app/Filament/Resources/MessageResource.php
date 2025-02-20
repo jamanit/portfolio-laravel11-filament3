@@ -56,12 +56,20 @@ class MessageResource extends Resource
                     ->required()
                     ->type('email')
                     ->maxLength(255),
-                Textarea::make('message')
+                RichEditor::make('message')
                     ->label('Message')
                     ->placeholder('Enter Message')
-                    ->required()
+                    ->nullable()
                     ->string()
-                    ->maxLength(5000),
+                    ->maxLength(3000)
+                    ->columnSpan('full')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'redo',
+                        'undo',
+                    ]),
                 Select::make('status')
                     ->label('Status')
                     // ->placeholder('')
@@ -125,8 +133,8 @@ class MessageResource extends Resource
     {
         return [
             'index'  => Pages\ListMessages::route('/'),
-            'create' => Pages\CreateMessage::route('/create'),
-            'edit'   => Pages\EditMessage::route('/{record}/edit'),
+            // 'create' => Pages\CreateMessage::route('/create'),
+            // 'edit'   => Pages\EditMessage::route('/{record}/edit'),
         ];
     }
 }

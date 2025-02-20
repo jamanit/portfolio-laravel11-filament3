@@ -22,9 +22,9 @@
                 </div>
                 <p class="mt-1 text-xs text-gray-400">{{ $project->created_at }}</p>
                 <div class="mt-3">
-                    <p class="text-gray-400" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                        {!! $project->description !!}
-                    </p>
+                    <div class="text-gray-400" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        {!! str($project->description)->sanitizeHtml() !!}
+                    </div>
                 </div>
                 <div class="mt-3 flex flex-wrap gap-2">
                     @php

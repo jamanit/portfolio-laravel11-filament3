@@ -13,7 +13,7 @@
                     <div class="rounded-md px-2 py-1 text-xs font-semibold bg-green-400 text-green-900">{{ $experience->end_year ? $experience->end_year : 'Present' }}</div>
                 </div>
                 @if ($experience->job_description)
-                    <p class="mt-3 text-gray-400">{!! $experience->job_description !!}</p>
+                    <div class="mt-3 text-gray-400">{!! str($experience->job_description)->sanitizeHtml() !!}</div>
                 @endif
             </div>
         </div>
