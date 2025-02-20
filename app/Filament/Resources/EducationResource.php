@@ -18,7 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-// use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\TextArea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
@@ -71,12 +71,12 @@ class EducationResource extends Resource
                     ->placeholder('YYYY')
                     ->nullable()
                     ->type('number'),
-                // TextArea::make('description')
-                //     ->label('Description')
-                //     ->placeholder('Enter Description')
-                //     ->nullable()
-                //     ->string()
-                //     ->maxLength(1000),
+                TextArea::make('description')
+                // ->label('Description')
+                // ->placeholder('Enter Description')
+                // ->nullable()
+                // // ->string()
+                // // ->maxLength(1000),
             ]);
     }
 
