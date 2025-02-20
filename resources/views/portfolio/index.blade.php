@@ -136,7 +136,7 @@
                 <div class="text-sm"><a href="{{ route('testimonial', ['username' => $user->username]) }}">View all Testimonials →</a></div>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-6 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
             <x-testimonial-data :testimonials="$testimonials" />
         </div>
     </div>

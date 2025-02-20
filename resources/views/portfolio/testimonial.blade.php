@@ -15,7 +15,7 @@
                 <div><span class="bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent">Testimonials</span></div>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-6 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
             <x-testimonial-data :testimonials="$testimonials" />
         </div>
         <div class="mt-6">

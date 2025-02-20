@@ -14,7 +14,7 @@
     <meta name="description" content="Boilerplate built with Astro using React and Tailwind CSS">
     <meta name="author" content="Emma">
     <link rel="alternate" type="application/rss+xml" href="{{ asset('/') }}astro-boilerplate/rss.xml">
-    <link rel="icon" type="image/x-icon" href="{{ asset('/') }}astro-boilerplate/favicon.ico">
+    {{-- <link rel="icon" type="image/x-icon" href="{{ asset('/') }}astro-boilerplate/favicon.ico"> --}}
     <link rel="stylesheet" href="{{ asset('/') }}astro-boilerplate/_astro/index.CvLV1VIh.css" />
     {{-- enf astro boilerplate --}}
 
