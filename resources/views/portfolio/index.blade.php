@@ -214,9 +214,7 @@
                     },
                     error: function(xhr) {
                         let errorMessage = 'Something went wrong! Please try again later.';
-                        // if (xhr.status === 422) {
-                        //     errorMessage = 'Validation failed. Please check your inputs.';
-                        // }
+
                         if (xhr.status === 422) {
                             let errors = xhr.responseJSON.errors;
                             errorMessage = '';
