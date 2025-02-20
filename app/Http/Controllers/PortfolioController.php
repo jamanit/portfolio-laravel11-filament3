@@ -133,7 +133,7 @@ class PortfolioController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        Mail::to(['itservice.jaman@gmail.com'])->send(new MessageMail($data));
+        Mail::to([$request->destination_email])->send(new MessageMail($data));
 
         return response()->json([
             'status'  => 'success',

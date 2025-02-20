@@ -153,6 +153,7 @@
             <form id="message-form" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="hidden" name="destination_email" value="{{ $user->email }}">
                 <div class="grid md:grid-cols-2 grid-cols-1 gap-6">
                     <div class="mb-3">
                         <label for="name" class="form-label block text-sm font-medium text-white">Name</label>
