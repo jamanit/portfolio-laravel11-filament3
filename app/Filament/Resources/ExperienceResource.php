@@ -18,7 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
@@ -64,7 +64,7 @@ class ExperienceResource extends Resource
                     ->placeholder('YYYY')
                     ->nullable()
                     ->type('number'),
-                TextArea::make('job_description')
+                Textarea::make('job_description')
                     ->label('Job Description')
                     ->placeholder('Enter Job Description')
                     ->nullable()

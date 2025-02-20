@@ -18,7 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
@@ -89,7 +89,7 @@ class ProjectResource extends Resource
                     ->columnSpan('full')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('/projects/description'),
-                TextArea::make('labels')
+                Textarea::make('labels')
                     ->label('Labels')
                     ->placeholder('Enter labels separated by commas (e.g., Tech, Web, Design)')
                     ->helperText('Type labels separated by commas.')

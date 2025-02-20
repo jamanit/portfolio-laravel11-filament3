@@ -18,7 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
@@ -48,7 +48,7 @@ class TestimonialResource extends Resource
                     ->required()
                     ->string()
                     ->maxLength(255),
-                TextArea::make('testimonial_text')
+                Textarea::make('testimonial_text')
                     ->label('Testimonial Text')
                     ->placeholder('Enter Testimonial Text')
                     ->required()
