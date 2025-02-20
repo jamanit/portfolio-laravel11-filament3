@@ -120,16 +120,18 @@ class PortfolioController extends Controller
     public function message_store(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string|max:255',
+            'name'    => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]*$/'],
             'email'   => 'required|email|max:255',
-            'message' => 'required|string',
+            'message' => 'required|string|max:3000',
             'user_id' => 'required|integer',
+        ], [
+            'name.regex' => 'The name can only contain letters and spaces.',
         ]);
 
         $data = Message::create([
             'name'    => $request->name,
             'email'   => $request->email,
-            'message' => $request->message,
+            'message' => strip_tags($request->input('message')),
             'user_id' => $request->user_id,
         ]);
 
