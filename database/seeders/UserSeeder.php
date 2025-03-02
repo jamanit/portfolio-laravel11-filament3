@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email'           => 'superadmin@gmail.com',
             'password'        => bcrypt('password'),
             'profile_picture' => null,
-            'bio'             => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisi tellus, non imperdiet nisi tempor at. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+            'bio'             => "Saya adalah IT Programmer berpengalaman dengan fokus pada pengembangan perangkat lunak, khususnya dalam aplikasi web. Saya telah terlibat dalam berbagai proyek, mulai dari pengembangan hingga pemeliharaan dan peningkatan kinerja aplikasi web jangka panjang. Sepanjang karier saya, saya telah berhasil memberikan solusi web responsif dan mengatasi tantangan kompleks seperti sistem keamanan, sistem validasi, API, dan optimisasi UI/UX. Saya juga disiplin dalam kolaborasi tim untuk memastikan bahwa solusi yang dikembangkan memenuhi tujuan bisnis. Selain pengembangan web, saya memiliki keterampilan dalam bidang IT Teknisi yaitu memperbaiki perangkat komputer dan ponsel serta Desain Grafis seperti pembuatan logo, brosur, poster, banner dan undangan. Dengan kombinasi keahlian ini, saya siap mendukung proyek apa pun yang akan dikerjakan.",
             'phone_number'    => null,
             'whatsapp_number' => null,
             'linkedin_url'    => null,
