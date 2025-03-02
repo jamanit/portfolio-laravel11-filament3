@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\PortfolioResource\RelationManagers;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,28 +18,16 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Columns\ViewColumn;
 
-use App\Models\User;
-
-class CategoryResource extends Resource
+class CategoriesRelationManager extends RelationManager
 {
-    protected static ?string $model = Category::class;
+    protected static string $relationship = 'categories';
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->label('User')
-                    // ->placeholder('')
-                    ->required()
-                    ->options(
-                        User::all()->pluck('name', 'id')->toArray()
-                    )
-                    ->preload()
-                    ->searchable(),
                 TextInput::make('name')
                     ->label('Name')
                     ->placeholder('Enter Name')
@@ -52,9 +37,10 @@ class CategoryResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
                     ->label('Name')
@@ -73,30 +59,18 @@ class CategoryResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListCategories::route('/'),
-            // 'create' => Pages\CreateCategory::route('/create'),
-            // 'edit' => Pages\EditCategory::route('/{record}/edit'),
-        ];
     }
 }

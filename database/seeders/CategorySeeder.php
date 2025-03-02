@@ -14,13 +14,16 @@ class CategorySeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Category 1',
+                'user_id' => 2,
+                'name'    => 'Category 1',
             ],
             [
-                'name' => 'Category 2',
+                'user_id' => 2,
+                'name'    => 'Category 2',
             ],
             [
-                'name' => 'Category 3',
+                'user_id' => 2,
+                'name'    => 'Category 3',
             ],
         ];
         foreach ($data as $item) {

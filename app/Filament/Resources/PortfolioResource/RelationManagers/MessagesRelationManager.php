@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\PortfolioResource\RelationManagers;
 
-use App\Filament\Resources\MessageResource\Pages;
-use App\Filament\Resources\MessageResource\RelationManagers;
-use App\Models\Message;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Models\User;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -22,28 +18,16 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Columns\ViewColumn;
 
-use function PHPSTORM_META\type;
-
-class MessageResource extends Resource
+class MessagesRelationManager extends RelationManager
 {
-    protected static ?string $model = Message::class;
+    protected static string $relationship = 'messages';
 
-    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->label('User')
-                    // ->placeholder('')
-                    ->required()
-                    ->options(
-                        User::all()->pluck('name', 'id')->toArray()
-                    )
-                    ->preload()
-                    ->searchable(),
                 TextInput::make('name')
                     ->label('Name')
                     ->placeholder('Enter Name')
@@ -82,9 +66,10 @@ class MessageResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
                     ->label('Name')
@@ -111,30 +96,18 @@ class MessageResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index'  => Pages\ListMessages::route('/'),
-            // 'create' => Pages\CreateMessage::route('/create'),
-            // 'edit'   => Pages\EditMessage::route('/{record}/edit'),
-        ];
     }
 }

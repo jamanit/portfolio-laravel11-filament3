@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\PortfolioResource\RelationManagers;
 
-use App\Filament\Resources\ExperienceResource\Pages;
-use App\Filament\Resources\ExperienceResource\RelationManagers;
-use App\Models\Experience;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Models\User;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -22,26 +18,16 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Columns\ViewColumn;
 
-class ExperienceResource extends Resource
+class ExperiencesRelationManager extends RelationManager
 {
-    protected static ?string $model = Experience::class;
+    protected static string $relationship = 'experiences';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->label('User')
-                    // ->placeholder('')
-                    ->required()
-                    ->options(
-                        User::all()->pluck('name', 'id')->toArray()
-                    )
-                    ->preload()
-                    ->searchable(),
                 TextInput::make('job_title')
                     ->label('Job Title')
                     ->placeholder('Enter Job Title')
@@ -81,9 +67,10 @@ class ExperienceResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('job_title')
             ->columns([
                 TextColumn::make('job_title')
                     ->label('Job Title')
@@ -114,30 +101,18 @@ class ExperienceResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListExperiences::route('/'),
-            'create' => Pages\CreateExperience::route('/create'),
-            'edit' => Pages\EditExperience::route('/{record}/edit'),
-        ];
     }
 }

@@ -14,18 +14,18 @@ class Post extends Model
 
     protected static function booted()
     {
-        static::saving(function ($project) {
-            if ($project->isDirty('image')) {
-                $oldFile = $project->getOriginal('image');
+        static::saving(function ($post) {
+            if ($post->isDirty('image')) {
+                $oldFile = $post->getOriginal('image');
                 if ($oldFile) {
                     Storage::disk('public')->delete($oldFile);
                 }
             }
         });
 
-        static::deleting(function ($project) {
-            if ($project->image) {
-                Storage::disk('public')->delete($project->image);
+        static::deleting(function ($post) {
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
             }
         });
     }

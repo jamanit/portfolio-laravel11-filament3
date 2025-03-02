@@ -125,7 +125,7 @@ class PostResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
-                    ->label('User')
+                    ->label('Owner')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')

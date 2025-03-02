@@ -55,8 +55,9 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::saving(function ($user) {
-            if ($user->isDirty('photo')) {
-                $oldFile = $user->getOriginal('photo');
+            // delete old files when updating
+            if ($user->isDirty('profile_picture')) {
+                $oldFile = $user->getOriginal('profile_picture');
                 if ($oldFile) {
                     Storage::disk('public')->delete($oldFile);
                 }
@@ -64,19 +65,36 @@ class User extends Authenticatable
         });
 
         static::deleting(function ($user) {
-            if ($user->photo) {
-                Storage::disk('public')->delete($user->photo);
+            // delete files when deleted
+            if ($user->profile_picture) {
+                Storage::disk('public')->delete($user->profile_picture);
             }
 
+            foreach ($user->projects as $project) {
+                if ($project->image) {
+                    Storage::disk('public')->delete($project->image);
+                }
+            }
+
+            foreach ($user->posts as $post) {
+                if ($post->image) {
+                    Storage::disk('public')->delete($post->image);
+                }
+            }
+
+            // delete relations when deleted
             $user->skills()->delete();
-            $user->projects()->delete();
             $user->experiences()->delete();
             $user->educations()->delete();
             $user->testimonials()->delete();
             $user->messages()->delete();
+            $user->categories()->delete();
+            $user->projects()->delete();
+            $user->posts()->delete();
         });
 
         static::creating(function ($model) {
+            // create usrename otomatis when created user
             if ($model->username !== 'superadmin') {
                 $baseUsername = Str::slug($model->name, '_');
 
@@ -102,11 +120,6 @@ class User extends Authenticatable
         return $this->hasMany(Skill::class);
     }
 
-    public function projects()
-    {
-        return $this->hasMany(Project::class);
-    }
-
     public function experiences()
     {
         return $this->hasMany(Experience::class);
@@ -125,5 +138,20 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }
