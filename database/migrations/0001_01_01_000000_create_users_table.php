@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role');
             $table->string('profile_picture')->nullable();
             $table->text('bio')->nullable();
             $table->string('phone_number')->nullable();
@@ -28,7 +29,6 @@ return new class extends Migration
             $table->string('instagram_url')->nullable();
             $table->string('x_url')->nullable();
             $table->string('youtube_url')->nullable();
-            $table->integer('portfolio_view')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

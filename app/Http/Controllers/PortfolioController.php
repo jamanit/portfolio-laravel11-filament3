@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Visitor;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Message;
@@ -28,7 +29,10 @@ class PortfolioController extends Controller
         $posts        = Post::where('user_id', $user->id)->where('status', 'Publish')->orderBy('id', 'desc')->limit(3)->get();
 
         if (!session()->has('viewed_portfolio')) {
-            $user->increment('portfolio_view');
+            Visitor::create([
+                'user_id' => $user->id,
+                'ip'      => request()->ip(),
+            ]);
 
             session(['viewed_portfolio' => $user->username]);
         }

@@ -74,6 +74,14 @@ class PortfolioResource extends Resource
                     ->string()
                     ->minLength(6)
                     ->dehydrated(fn($state) => !empty($state)),
+                Select::make('role')
+                    ->label('Role')
+                    // ->placeholder('')
+                    ->required()
+                    ->options([
+                        'admin' => 'admin',
+                        'user'  => 'user',
+                    ]),
                 FileUpload::make('profile_picture')
                     ->label('Profile Picture')
                     ->placeholder('')
@@ -210,14 +218,14 @@ class PortfolioResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\SkillsRelationManager::class,
-            RelationManagers\ExperiencesRelationManager::class,
             RelationManagers\EducationsRelationManager::class,
-            RelationManagers\TestimonialsRelationManager::class,
-            RelationManagers\MessagesRelationManager::class,
+            RelationManagers\ExperiencesRelationManager::class,
+            RelationManagers\SkillsRelationManager::class,
             RelationManagers\CategoriesRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
             RelationManagers\PostsRelationManager::class,
+            RelationManagers\TestimonialsRelationManager::class,
+            RelationManagers\MessagesRelationManager::class,
         ];
     }
 

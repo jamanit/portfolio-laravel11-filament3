@@ -28,6 +28,8 @@ class EducationResource extends Resource
     protected static ?string $model = Education::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationGroup = 'Data Masters';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -61,6 +63,14 @@ class EducationResource extends Resource
                         'S2 (Master\'s Degree)'   => 'S2 (Master\'s Degree)',
                         'S3 (Doctoral Degree)'    => 'S3 (Doctoral Degree)',
                     ]),
+                TextInput::make('gpa')
+                    ->label('GPA')
+                    ->placeholder('Enter GPA (e.g., 3.50)')
+                    ->numeric()
+                    ->minValue(0.00)
+                    ->maxValue(4.00)
+                    ->step(0.01)
+                    ->nullable(),
                 TextInput::make('start_year')
                     ->label('Start Year')
                     ->placeholder('YYYY')
@@ -98,6 +108,10 @@ class EducationResource extends Resource
                     ->searchable(),
                 TextColumn::make('degree')
                     ->label('Degree')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('gpa')
+                    ->label('GPA')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('start_year')

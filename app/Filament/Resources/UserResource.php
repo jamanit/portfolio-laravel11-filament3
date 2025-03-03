@@ -29,8 +29,9 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationIcon  = 'heroicon-o-user';
+    protected static ?string $navigationGroup = 'Data Masters';
+    protected static ?int $navigationSort     = 1;
 
     public static function form(Form $form): Form
     {
@@ -75,6 +76,14 @@ class UserResource extends Resource
                     ->string()
                     ->minLength(6)
                     ->dehydrated(fn($state) => !empty($state)),
+                Select::make('role')
+                    ->label('Role')
+                    // ->placeholder('')
+                    ->required()
+                    ->options([
+                        'admin' => 'admin',
+                        'user'  => 'user',
+                    ]),
                 FileUpload::make('profile_picture')
                     ->label('Profile Picture')
                     ->placeholder('')
@@ -175,14 +184,14 @@ class UserResource extends Resource
                     ->label('Email')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('role')
+                    ->label('Role')
+                    ->sortable()
+                    ->searchable(),
                 ImageColumn::make('profile_picture')
                     ->label('Profile Picture')
                     ->width(50)
                     ->height(50)
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('portfolio_view')
-                    ->label('Portfolio View')
                     ->sortable()
                     ->searchable(),
                 ViewColumn::make('portfolio')
@@ -222,9 +231,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
+            'index'  => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'edit'   => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

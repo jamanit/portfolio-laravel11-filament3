@@ -91,6 +91,7 @@ class User extends Authenticatable
             $user->categories()->delete();
             $user->projects()->delete();
             $user->posts()->delete();
+            $user->visitors()->delete();
         });
 
         static::creating(function ($model) {
@@ -153,5 +154,10 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function visitors()
+    {
+        return $this->hasMany(Visitor::class);
     }
 }

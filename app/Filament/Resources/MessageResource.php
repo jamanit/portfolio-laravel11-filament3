@@ -30,6 +30,8 @@ class MessageResource extends Resource
     protected static ?string $model = Message::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+    protected static ?string $navigationGroup = 'Data Masters';
+    protected static ?int $navigationSort = 9;
 
     public static function form(Form $form): Form
     {

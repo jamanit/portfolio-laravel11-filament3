@@ -28,6 +28,8 @@ class SkillResource extends Resource
     protected static ?string $model = Skill::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-bolt';
+    protected static ?string $navigationGroup = 'Data Masters';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
