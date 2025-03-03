@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Visitor;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class VisitorsChart extends ChartWidget
         // Mengambil jumlah pengunjung per bulan dalam 6 bulan terakhir dengan format Y-m (tahun-bulan)
         $visitors = Visitor::select(DB::raw('strftime("%Y-%m", created_at) as month_year'), DB::raw('COUNT(*) as total'))
             ->where('created_at', '>=', now()->subMonths(6)) // Filter pengunjung yang tercatat dalam 6 bulan terakhir
+            ->where('user_id', Auth::id())
             ->groupBy('month_year') // Kelompokkan berdasarkan bulan-tahun
             ->orderBy('month_year') // Urutkan berdasarkan bulan-tahun
             ->get()
