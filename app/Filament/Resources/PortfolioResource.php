@@ -182,6 +182,10 @@ class PortfolioResource extends Resource
                     ->label('Email')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('role')
+                    ->label('Role')
+                    ->sortable()
+                    ->searchable(),
                 ImageColumn::make('profile_picture')
                     ->label('Profile Picture')
                     ->width(50)
