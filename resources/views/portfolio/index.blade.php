@@ -111,6 +111,9 @@
                             <div>
                                 <div class="text-xl font-semibold">{{ $education->degree }}</div>
                                 <div class="text-xl font-semibold">{{ $education->school_name }}</div>
+                                @if ($education->gpa)
+                                    <p class="mt-1 text-xs text-gray-400">GPA: {{ $education->gpa }}</p>
+                                @endif
                                 <div class="mt-3 flex flex-wrap gap-2">
                                     <div class="rounded-md px-2 py-1 text-xs font-semibold bg-fuchsia-400 text-fuchsia-900">{{ $education->start_year }}</div>
                                     <p>to</p>
