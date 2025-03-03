@@ -76,14 +76,14 @@ class UserResource extends Resource
                     ->string()
                     ->minLength(6)
                     ->dehydrated(fn($state) => !empty($state)),
-                Select::make('role')
-                    ->label('Role')
+                Select::make('roles')
+                    ->label('Roles')
                     // ->placeholder('')
-                    ->required()
-                    ->options([
-                        'admin' => 'admin',
-                        'user'  => 'user',
-                    ]),
+                    ->nullable()
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload()
+                    ->searchable(),
                 FileUpload::make('profile_picture')
                     ->label('Profile Picture')
                     ->placeholder('')
@@ -182,10 +182,6 @@ class UserResource extends Resource
                     ->searchable(),
                 TextColumn::make('email')
                     ->label('Email')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('role')
-                    ->label('Role')
                     ->sortable()
                     ->searchable(),
                 ImageColumn::make('profile_picture')

@@ -13,20 +13,7 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        // Permissions umum yang bisa diterapkan ke berbagai objek
-        Permission::firstOrCreate(['name' => 'create']);
-        Permission::firstOrCreate(['name' => 'edit']);
-        Permission::firstOrCreate(['name' => 'delete']);
-        Permission::firstOrCreate(['name' => 'view']);
-
-        // Membuat roles dengan guard_name 'web'
-        $roleAdmin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
-        $roleUser = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
-
-        // Memberikan permission ke role admin
-        $roleAdmin->givePermissionTo(['create', 'edit', 'delete', 'view']);
-
-        // Memberikan permission tertentu ke role user
-        $roleUser->givePermissionTo('view');
+        Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
     }
 }
